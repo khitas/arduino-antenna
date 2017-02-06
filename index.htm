@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>ENG Management Portal</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Cache-Control" content="no-cache">
+<script>
+function GetMonitorValues() {
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    var data = JSON.parse(request.responseText);
+//                    document.getElementById("monitor_up_down").innerHTML = data.monitor_up_down;
+                    document.getElementById("monitor_left_right").innerHTML = data.monitor_left_right;
+                    document.getElementById("monitor_signal").innerHTML = data.monitor_signal;
+                    document.getElementById("port1").style.backgroundColor = data.port1;
+                    document.getElementById("port2").style.backgroundColor = data.port2;
+                    document.getElementById("port3").style.backgroundColor = data.port3;
+                    document.getElementById("port4").style.backgroundColor = data.port4;
+                    document.getElementById("port5").style.backgroundColor = data.port5;
+                    document.getElementById("port6").style.backgroundColor = data.port6;
+                    document.getElementById("port7").style.backgroundColor = data.port7;
+                    document.getElementById("port8").style.backgroundColor = data.port8;
+                    document.getElementById("channel1").style.backgroundColor = data.channel1;
+                    document.getElementById("channel2").style.backgroundColor = data.channel2;
+                    document.getElementById("channel3").style.backgroundColor = data.channel3;
+                    document.getElementById("channel4").style.backgroundColor = data.channel4;
+                    document.getElementById("channel5").style.backgroundColor = data.channel5;
+                    document.getElementById("command1").style.backgroundColor = data.command1;
+                    document.getElementById("command2").style.backgroundColor = data.command2;
+                    document.getElementById("command3").style.backgroundColor = data.command3;
+                    document.getElementById("command4").style.backgroundColor = data.command4;
+                    document.getElementById("command5").style.backgroundColor = data.command5;
+                    document.getElementById("polarV").style.backgroundColor = data.polarV;
+                    document.getElementById("polarH").style.backgroundColor = data.polarH;
+                    document.getElementById("speedF").style.backgroundColor = data.speedF;
+                    document.getElementById("speedS").style.backgroundColor = data.speedS;
+                    drawArrow(data.angle);
+                } catch (e) { }
+            }
+        }
+    }
+    request.open("GET", "/monitor_values" + nocache, false);
+    request.send();
+
+    setTimeout("GetMonitorValues()", 1000);
+}
+
+function SetMultiPosition(position, led) {
+    var led = document.getElementById(led);
+    led.style.color = "red";
+
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    led.style.color = "lightgray";
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_multi_position?position=" + position + nocache, false);
+    request.send();
+}
+
+function SetPosition(position, led) {
+    var led = document.getElementById(led);
+    led.style.color = "red";
+
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    led.style.color = "lightgray";
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_position?position=" + position + nocache, false);
+    request.send();
+}
+
+function SetChannel(channel) {
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_channel?channel=" + channel + nocache, false);
+    request.send();
+}
+
+function SetCommand(command) {
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_command?command=" + command + nocache, false);
+    request.send();
+}
+
+function SetPolar(value) {
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_polar?value=" + value + nocache, false);
+    request.send();
+}
+
+function SetSpeed(value) {
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_speed?value=" + value + nocache, false);
+    request.send();
+}
+
+function SetLeds(color) {
+    document.getElementById("led1").style.color = color;
+    document.getElementById("led2").style.color = color;
+    document.getElementById("led3").style.color = color;
+    document.getElementById("led4").style.color = color;
+}
+
+function SetAngleLeds(color) {
+    document.getElementById("led2").style.color = color;
+    document.getElementById("led3").style.color = color;
+}
+
+function ResetCPU() {
+    SetLeds("red");
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    try {
+        request.onreadystatechange = function () {
+            if ((request.readyState == 4) && (request.status == 200)) {
+                if (request.responseText != null) {
+                        //var data = JSON.parse(request.responseText);
+                }
+            }
+        }
+        request.open("GET", "/reset_cpu" + nocache, false);
+        request.send();
+    } catch (e) {
+        SetLeds("lightgray");
+    }
+}
+
+function ResetPCB() {
+    SetLeds("red");
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                    SetLeds("lightgray");
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/reset_pcb" + nocache, false);
+    request.send();
+}
+
+function SetAngle() {
+    SetAngleLeds("red");
+    nocache = ""; //"?nocache=" + Math.random() * 1000000;
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function () {
+        if ((request.readyState == 4) && (request.status == 200)) {
+            if (request.responseText != null) {
+                try {
+                    //var data = JSON.parse(request.responseText);
+                    //drawArrow(data.angle);
+                    SetAngleLeds("lightgray");
+                } catch (e) {  }
+            }
+        }
+    }
+    request.open("GET", "/set_angle?angle=" + document.getElementById("txtval").value + nocache, false);
+    request.send();
+}
+
+function drawArrow(angle) {
+    var TO_RADIANS = Math.PI/180;
+
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+    var image = new Image();
+
+    context.clearRect(0,0,canvas.width, canvas.height);
+    image.src = "arrow.png";
+
+    context.save();
+    context.translate((canvas.width/2), (canvas.height/2));
+    context.rotate(angle * TO_RADIANS);
+    context.drawImage(image, -(image.width/2), -(image.height/2));
+    context.restore();
+}
+</script>
+<style>
+    body{ padding:0px; text-align:center; }
+    h1{ font-family:Verdana; }
+    h2{ font-family:Verdana; }
+    .led{font-size:40px; color: lightgray}
+    .header-title{font-family:Verdana; font-size:20px; font-weight: bold;}
+    .button-arrow { background-color: #293F5E; border-radius: 10px; color: white; font-size:20px; display: inline-block; height: 40px; line-height: 40px; text-decoration: none; width: 80px; text-align: center; }
+    .button-arrow-text { font-size:14px; color: lightgray; }
+    .button-arrow-arrow { font-size:25px;}
+    .form-text { background-color: lightgray; font-family: Courier; border:1px; width:80px; height:30px; font-size:20px; text-align: center; }
+    .monitor-title { background-color: gray; font-family: Verdana; color: white; font-size:20px; display: inline-block; height: 40px; line-height: 40px; text-decoration: none; width: 200px; text-align: center; }
+    .monitor-display { background-color: lightgray; font-family: Courier; color: black; font-size:24px;  display: inline-block; height: 40px; line-height: 40px; text-decoration: none; width: 200px; text-align: center; }
+    .port { background-color: lightgray; cursor: default; font-family: Verdana; border-radius: 10px; color: black; font-size:20px; display: inline-block; height: 40px; line-height: 40px; text-decoration: none; width: 120px; text-align: center; }
+    .button { background-color: #293F5E; font-family: Verdana; border-radius: 10px; color: white; font-size:20px; display: inline-block; height: 40px; line-height: 40px; text-decoration: none; width: 120px; text-align: center; }
+</style>
+</head>
+<body onload="GetMonitorValues()">
+    <center>
+        <table border="0" width="100%">
+            <tr>
+                <td width="200px">
+                    <span id="led1" class="led">&#9679;</span>
+                    <span id="led2" class="led">&#9679;</span>
+                    <span id="led3" class="led">&#9679;</span>
+                    <span id="led4" class="led">&#9679;</span>
+                </td>
+                <td align="center"><span class="header-title">ENG Management Portal</span></td>
+                <td width="200px" nowrap align="right">
+                    <table border="0" cellpadding="0">
+                        <tr>
+                            <td><a class="button" href="javascript:void(0)" onclick="ResetCPU()">RST-CPU</a></td>
+                            <td><a class="button" href="javascript:void(0)" onclick="ResetPCB()">RST-PCB</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        <hr/>
+    </center>
+
+    <table border="0" width="100%">
+        <tr>
+            <td style="min-width: 620px" width="50%">
+                <center>
+                    <h2>Station Controller</h2>
+                    <!--<a class="button-arrow" href="javascript:void(0)" onclick="SetPosition('up', 'led1')">&#65514;</a>-->
+                    <!--<a class="button-arrow" href="javascript:void(0)" onclick="SetMultiPosition('up', 'led1')"><span class="button-arrow-text">x15</span></a>-->
+                    <!--<br><br>-->
+                    <a class="button-arrow" href="javascript:void(0)" onclick="SetMultiPosition('left', 'led2')"><span class="button-arrow-text">x5</span></a>
+                    <a class="button-arrow" href="javascript:void(0)" onclick="SetPosition('left', 'led2')"><div class="button-arrow-arrow">&#10553;</div></a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="form-text" id="txtval" value="0">
+                    <a class="button-arrow" href="javascript:void(0)" onclick="SetAngle()">Set</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="button-arrow" href="javascript:void(0)" onclick="SetPosition('right', 'led3')"><span class="button-arrow-arrow">&#10552;</span></a>
+                    <a class="button-arrow" href="javascript:void(0)" onclick="SetMultiPosition('right', 'led3')"><span class="button-arrow-text">x5</span></a>
+                    <!--<br><br>-->
+                    <!--<a class="button-arrow" href="javascript:void(0)" onclick="SetPosition('down', 'led4')">&#65516;</a>-->
+                    <!--<a class="button-arrow" href="javascript:void(0)" onclick="SetMultiPosition('down', 'led4')"><span class="button-arrow-text">x15</span></a>-->
+                    <br><br>
+                </center>
+
+                <center>
+                    <table border="0" width="620">
+                        <tr>
+                            <td width="50%" align="left">
+                                <a id="polarV" class="button" href="javascript:void(0)" onclick="SetPolar('V')">V</a>
+                                <a id="polarH" class="button" href="javascript:void(0)" onclick="SetPolar('H')">H</a>
+                            </td>
+                            <td width="50%" align="right">
+                                <a id="speedF" class="button" href="javascript:void(0)" onclick="SetSpeed('F')">Fast</a>
+                                <a id="speedS" class="button" href="javascript:void(0)" onclick="SetSpeed('S')">Slow</a>
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                </center>
+
+                <center>
+                    <table border="0">
+                        <tr>
+                            <!--<td class="monitor-title">Up-Down</td>-->
+                            <td class="monitor-title">Signal Level</td>
+                            <td class="monitor-title">Left-Right</td>
+                        </tr>
+                        <tr>
+                            <!--<td class="monitor-display"><span id="monitor_up_down">0</span></td>-->
+                            <td class="monitor-display"><span id="monitor_signal">0</span></td>
+                            <td class="monitor-display"><span id="monitor_left_right">0</span></td>
+                        </tr>
+                    </table>
+                </center>
+
+                <center>
+                    <h2>Remote Ports</h2>
+                    <table border="0">
+                        <tr>
+                            <td align="center">
+                                <a id="port1" class="port" href="javascript:void(0)">Port 1</a>
+                                <a id="port2" class="port" href="javascript:void(0)">Port 2</a>
+                                <a id="port3" class="port" href="javascript:void(0)">Port 3</a>
+                                <a id="port4" class="port" href="javascript:void(0)">Port 4</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a id="port5" class="port" href="javascript:void(0)">Port 5</a>
+                                <a id="port6" class="port" href="javascript:void(0)">Port 6</a>
+                                <a id="port7" class="port" href="javascript:void(0)">Port 7</a>
+                                <a id="port8" class="port" href="javascript:void(0)">Port 8</a>
+                            </td>
+                        </tr>
+                    </table>
+                </center>
+
+                <center>
+                    <h2>Channels</h2>
+                    <a id="channel1" class="button" href="javascript:void(0)" onclick="SetChannel(1)">Channel 4</a>
+                    <a id="channel2" class="button" href="javascript:void(0)" onclick="SetChannel(2)">Channel 6</a>
+                    <a id="channel3" class="button" href="javascript:void(0)" onclick="SetChannel(3)">Channel 8</a>
+                    <a id="channel4" class="button" href="javascript:void(0)" onclick="SetChannel(4)">Channel 9</a>
+                    <a id="channel5" class="button" href="javascript:void(0)" onclick="SetChannel(5)">Channel 16</a>
+                    <br>
+                </center>
+                <center>
+                    <h2>Commands</h2>
+                    <a id="command1" class="button" href="javascript:void(0)" onclick="SetCommand(1)">Cmd 1</a>
+                    <a id="command2" class="button" href="javascript:void(0)" onclick="SetCommand(2)">Cmd 2</a>
+                    <a id="command3" class="button" href="javascript:void(0)" onclick="SetCommand(3)">Cmd 3</a>
+                    <a id="command4" class="button" href="javascript:void(0)" onclick="SetCommand(4)">Cmd 4</a>
+                    <a id="command5" class="button" href="javascript:void(0)" onclick="SetCommand(5)">Cmd 5</a>
+                    <br>
+                </center>
+
+
+            </td>
+            <td width="50%" align="center">
+                <canvas id="myCanvas" width="700" height="600" style="background-image: url('map.jpg'); background-repeat: no-repeat;"></canvas>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
